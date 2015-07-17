@@ -1,8 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html class="full" lang="en">
 <head>
 	<meta charset="utf-8">
   	<meta name="viewport" content="width=device-width, initial-scale=1">
+  	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
 <!-- bootstrap css -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -14,10 +18,42 @@
 </head>
 
 <body>
-<h1>hello world</h1>
+ <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">&nbsp;</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="#"></a>
+                    </li>
+                    <li>
+                        <a href="#">Sign Up</a>
+                    </li>
+                    <li>
+                        <a href="#">Log In</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>	
+    <br> <br> <br> <br>
+<h1>Culture Jam.</h1> <br>
 	<div class="container">
-	    <div class="row">
-	        <div class="col-md-3">
+	    <div class="col-md-4">
+	    	<div class="row">
 	        	<!-- search criteria  -->
 	        	<form id="new-country-search">
 	        		<div class="form-group">
@@ -27,14 +63,21 @@
 	        			<input type="submit" class="btn btn-success" value="Search">	
 	        		</div>
 	    		</form>
-	        </div>
-        </div>
-        <div class = "row">
-	        <div class="col-md-3">
-	        	<!-- search results in underscore template --> 
-	        </div>
-	    </div>
-	</div>
+        	</div>
+	        	<div class = "row">
+		        	<!-- search results from underscore template --> 
+		        	<ul class="list-group" id="results-list">
+		        	</ul>
+		        </div>
+	    	</div>
+		<div class="col-md-4"></div>
+		<div class="col-md-4">
+			<!-- PLAYLIST -->
+		</div>
+	</div>	
+
+		
+
 
 
   	<!-- jquery -->
@@ -43,14 +86,21 @@
   	<!-- bootstrap js -->
  	 <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
-  	<!-- underscore -->
-  	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
-
-  	<!-- client-side javascript -->
+	<!-- client-side javascript -->
 	<script type="text/javascript" src="scripts/main.js"></script>
 
-  	<!-- underscore template -->	
+  	<!-- underscore -->
+  	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+	<!-- search results underscore template -->
+	<script type="text/template" id="searchResults-template">
+    <li class="list-group-item">
+    	<%= trackName %> <br>
+    	<%= artist %> <br>
+    	<%= country %>
+    	</li>
+  	</script>
 
-  	        	
+
+
 </body>
 </html>
