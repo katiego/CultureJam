@@ -4,7 +4,8 @@ var mongoose = require('mongoose'),
 var SongSchema = new Schema({
   artist: String,
   trackName: String,
-  country: String
+  country: String, 
+  link: String
 });
 
 var Song = mongoose.model('Song', SongSchema);
