@@ -83,6 +83,9 @@
 		<div class="col-md-4"></div>
 		<div class="col-md-4">
 			<!-- PLAYLIST -->
+            <h2>Your Playlist</h2>
+            <ul class="list-group" id="playlist">
+            </ul>
 		</div>
 	</div>	
 
@@ -101,7 +104,7 @@
 
   	<!-- underscore -->
   	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
-	<!-- search results underscore template -->
+<!-- search results underscore template -->
 	<script type="text/template" id="searchResults-template">
     <li class="list-unstyled"> <span style="font-size:140%" >
     	<%= trackName %> - </span>
@@ -116,7 +119,22 @@
 
     	</li>
   	</script>
+<!-- playlist underscore template -->
+<script type="text/template" id="playlist-template">
+    <li class="list-unstyled"> <span style="font-size:140%" >
+        <%= playlist.trackName %> - </span>
+        <span style="font-size:120%"><%= playlist.artist %> <br>
+        <%= playlist.country %> &nbsp; &nbsp; &nbsp;      
+      <a class="icon-play" data-toggle="collapse" id="">
+          <span class="glyphicon glyphicon-play"></span>
+      </a> &nbsp; &nbsp; &nbsp;
+      <a class="icon-star" data-toggle="collapse" id="">
+        <span class="glyphicon glyphicon-star"></span>
+      </a>
 
+        </li>
+    </script>
 
 </body>
 </html>
+

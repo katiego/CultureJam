@@ -6,13 +6,12 @@ console.log('js works times 2');
 // 	{trackName: "The Rip Tide", artist: "Beirut", country: "USA"}
 // ];
 
-// compile underscore template
+
+
+// compile underscore templates
 var resultsTemplate = _.template($('#searchResults-template').html());
 
-/// on click event for boostrap selector to set targetCountry to selected country
-
-
-
+/// on click events + show songs for selected country
 $('#Japan').click(function(e) {
     e.preventDefault();// prevent the default anchor functionality
     console.log('japan click works');
@@ -55,7 +54,7 @@ $('#Colombia').click(function(e) {
 
 	_.each(allSongs, function(song, index) {
 	  // console.log(allSongs)
-	  // console.log(song);
+	  console.log(song);
 	  
 	  var $songHtml = $(resultsTemplate(song));
 	  console.log($songHtml);
@@ -99,6 +98,39 @@ $('#Kenya').click(function(e) {
 	});
 	});
 });
+
+// Playlist code
+
+// test data
+var users = [
+	{email: 'user1@testing.com', password: 'thiswillbeencripted', 
+		playlist: [
+		{artist: "Andreas Bourani", trackName: "Auf uns", country: "Germany", link: "https://www.youtube.com/watch?v=MYNLQjrBVPo"},
+		{artist: "Clean Bandit", trackName: "Rather Be ft. Jess Glynne", country: "Germany", link: "https://www.youtube.com/watch?v=m-M1AtrxztU"}
+		]
+	}];
+
+// var users = [
+// 	{artist: "Andreas Bourani", trackName: "Auf uns", country: "Germany", link: "https://www.youtube.com/watch?v=MYNLQjrBVPo"},
+// 	{artist: "Clean Bandit", trackName: "Rather Be ft. Jess Glynne", country: "Germany", link: "https://www.youtube.com/watch?v=m-M1AtrxztU"}
+// ]
+
+
+//underscore tempalte
+var userTemplate =  _.template($('#user-template').html()),
+var playlistTemplate = _.template($('#playlist-template').html());
+
+_.each(users, function(songHtml, index) {
+console.log(songHtml);
+var $songHtml = $(playlistTemplate(songHtml));
+$songHtml.attr('data-index', index);	  
+$('#playlist').append($songHtml);
+_.each(post.comments, function(comment) {
+
+$('#comment-display-' + comment.postId).append(postController.commentTemplate(comment));
+	});
+
+
 
 });
 
