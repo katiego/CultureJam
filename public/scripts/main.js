@@ -8,7 +8,7 @@ console.log('js works times 2');
 
 
 
-// compile underscore templates
+// compile underscore template for song search
 var resultsTemplate = _.template($('#searchResults-template').html());
 
 /// on click events + show songs for selected country
@@ -117,20 +117,21 @@ var users = [
 // add new song via modal
 $('#exampleModal').on('show.bs.modal', function (event) {
     console.log('show modal');
-    });
+});
 
 $('#add-song').on('submit', function() {
-var songArtist = $('#song-artist').val(); 
-var songTrackName = $('#song-trackName').val();
-var songCountry = $('#song-country').val();
-var songLink = $('#song-link').val();
-var songData = {artist: songArtist, trackName: songTrackName, country: songCountry, link: songLink}; 
-console.log(songData); 
+	var songArtist = $('#song-artist').val(); 
+	var songTrackName = $('#song-trackName').val();
+	var songCountry = $('#song-country').val();
+	var songLink = $('#song-link').val();
+	var songData = {artist: songArtist, trackName: songTrackName, country: songCountry, link: songLink}; 
+	console.log(songData); 
 
 	$.post('/api/songs', songData, function(newSong){
 	console.log(newSong); 
 	});
-$(this)[0].reset();	
+	
+	$(this)[0].reset();	
 });
 
 

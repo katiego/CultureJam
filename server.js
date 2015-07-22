@@ -16,6 +16,7 @@ app.use(express.static(__dirname + '/public'));
 mongoose.connect('mongodb://localhost/projectOne');
 
 var Song = require('./models/song');
+var User = require('./models/user');
 
 // set up root route to respond with 'index.html'
 app.get('/', function (req, res) {
@@ -57,8 +58,41 @@ app.get('/api/songs/:country', function(req, res) {
       res.json(foundSong);
     }
   });
-
 });
+
+
+app.get('/api/:userName/playlist', function(req, res){
+  var targetUser = req.params.userName
+  console.log(targetUser); 
+  User.find({userName: targetUser}, function(err, foundUser){
+    console.log(foundUser);
+    if(err){
+      console.log("error: ", err);
+      res.status(500).send(err);
+    } else {
+      // send back post object
+      res.json(foundUser);
+    }
+  });
+});
+
+app.put('/api/:userName/playlist', function(req, res){
+ var targetUser = req.params.userName
+  User.findOneAndUpdate({userName: targetUser}, function(err, foundUser){
+    console.log(foundUser);
+    $foundUser.songs.push({
+      artist: req.body.artist,
+      trackName: req.body.trackName,
+      country: req.body.country, 
+      link: req.body.link
+    }); 
+    foundUser.save(function (err, savedUser) {
+      console.log(savedUser);
+      res.json(savedUser);
+    });
+  });
+});
+
 
 
 
