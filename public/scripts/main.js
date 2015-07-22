@@ -8,8 +8,6 @@ var playlistTemplate = _.template($('#playlist-template').html());
 var resultsTemplate = _.template($('#searchResults-template').html());
 
 
-
-
 //check and change login message
 $.get('/currentuser', function(response){
 	//server responds with the current user
@@ -49,9 +47,6 @@ $('#results-list').on('click', '.icon-star', function(e) {
       }
     });
 });
-
-
-
 
 
 /// on click events + show songs for selected country

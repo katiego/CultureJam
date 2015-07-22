@@ -10,7 +10,7 @@ var express = require('express'),
 mongoose.connect(
   process.env.MONGOLAB_URI ||
   process.env.MONGOHQ_URL ||
-  'mongodb://localhost/YOUR_LOCAL_DATABASE_NAME' // plug in the db name you've been using
+  'mongodb://localhost/projectOne' // plug in the db name you've been using
 );
 
 // set session options
@@ -28,8 +28,6 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 // serve js and css files from public folder
 app.use(express.static(__dirname + '/public'));
-
-mongoose.connect('mongodb://localhost/projectOne');
 
 var Song = require('./models/song');
 // var User = require('./models/user');
@@ -199,6 +197,4 @@ app.put('/currentuser/songs/:songId', function(req, res) {
 
 
 // listen on port 3000
-app.listen(process.env.PORT || 3000, function () {
-  console.log('server started on localhost:3000');
-});
+app.listen(process.env.PORT || 3000);

@@ -2,8 +2,7 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema,
     bcrypt = require('bcrypt'),
     salt = bcrypt.genSaltSync(10),
-    Song = require('./song'),
-    session = require('express-session');
+    Song = require('./song');
 
 
 var UserSchema = new Schema({
