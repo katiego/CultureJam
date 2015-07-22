@@ -7,7 +7,6 @@ var express = require('express'),
 
 
 
-
 // tell app to use bodyParser middleware
 app.use(bodyParser.urlencoded({extended: true}));
 
@@ -29,6 +28,20 @@ app.get('/api/songs', function (req, res) {
   });
 });
 
+app.post('/api/songs', function (req, res) {
+  var newSong = new Song({
+    artist: req.body.artist,
+    trackName: req.body.trackName,
+    country: req.body.country, 
+    link: req.body.link
+  });
+console.log(newSong)
+  // save new phrase in db
+  newSong.save(function (err, savedSong) {
+    res.json(savedSong);
+  });
+});
+
 app.get('/api/songs/:country', function(req, res) {
 	var targetCountry = req.params.country
 	console.log(targetCountry)
@@ -46,6 +59,7 @@ app.get('/api/songs/:country', function(req, res) {
   });
 
 });
+
 
 
 // listen on port 3000
