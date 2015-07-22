@@ -7,6 +7,12 @@ var express = require('express'),
     salt = bcrypt.genSaltSync(10),
     session = require('express-session');    
 
+mongoose.connect(
+  process.env.MONGOLAB_URI ||
+  process.env.MONGOHQ_URL ||
+  'mongodb://localhost/YOUR_LOCAL_DATABASE_NAME' // plug in the db name you've been using
+);
+
 // set session options
 app.use(session({
   saveUninitialized: true,
@@ -14,6 +20,7 @@ app.use(session({
   secret: 'SuperSecretCookie',
   cookie: { maxAge: 600000 }
 }));
+
 
 
 // tell app to use bodyParser middleware
@@ -192,6 +199,6 @@ app.put('/currentuser/songs/:songId', function(req, res) {
 
 
 // listen on port 3000
-app.listen(3000, function () {
+app.listen(process.env.PORT || 3000, function () {
   console.log('server started on localhost:3000');
 });
