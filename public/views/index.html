@@ -53,7 +53,7 @@
 
 	<div class="container full">
 	<h1>Culture Jam.</h1> <br>	
-		<div class="col-md-4">
+		<div class="col-md-5">
 			<div class="row">
 	        	<!-- search criteria  -->
         	<form id="search-country">
@@ -80,8 +80,8 @@
 		        	</ul>
 		        </div>
 	    	</div>
-		<div class="col-md-4"></div>
-		<div class="col-md-4">
+		<div class="col-md-2"></div>
+		<div class="col-md-5">
 			<!-- PLAYLIST -->
             <h2>Your Playlist</h2>
             <ul class="list-group" id="playlist">
@@ -121,16 +121,18 @@
   	</script>
 <!-- playlist underscore template -->
 <script type="text/template" id="playlist-template">
-    <li class="list-unstyled"> <span style="font-size:140%" >
-        <%= playlist.trackName %> - </span>
-        <span style="font-size:120%"><%= playlist.artist %> <br>
-        <%= playlist.country %> &nbsp; &nbsp; &nbsp;      
+    <ul class="list-unstyled"> <span style="font-size:140%" >
+       <% for (var song in songs) { %>
+           <li><%= songs[song].trackName %></li>
+       <% } %>
+    
+  </div>
+
+    </span>
+    
       <a class="icon-play" data-toggle="collapse" id="">
           <span class="glyphicon glyphicon-play"></span>
-      </a> &nbsp; &nbsp; &nbsp;
-      <a class="icon-star" data-toggle="collapse" id="">
-        <span class="glyphicon glyphicon-star"></span>
-      </a>
+      </a> 
 
         </li>
     </script>

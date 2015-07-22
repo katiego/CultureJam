@@ -20,6 +20,7 @@ $('#Japan').click(function(e) {
     var targetCountry = 'Japan'
 
     $.get('/api/songs/' + targetCountry, function(allSongs) {
+    $('#results-list').html('');
 	_.each(allSongs, function(song, index) {
 	  console.log(song);
 	  
@@ -37,6 +38,7 @@ $('#India').click(function(e) {
     var targetCountry = 'India'
 
     $.get('/api/songs/' + targetCountry, function(allSongs) {
+    $('#results-list').html('');
 	_.each(allSongs, function(song, index) {
 	  console.log(song);
 	  
@@ -51,7 +53,7 @@ $('#Colombia').click(function(e) {
     e.preventDefault();// prevent the default anchor functionality
     var targetCountry = 'Colombia'
     $.get('/api/songs/' + targetCountry, function(allSongs) {
-
+    $('#results-list').html('');
 	_.each(allSongs, function(song, index) {
 	  // console.log(allSongs)
 	  console.log(song);
@@ -72,6 +74,7 @@ $('#Germany').click(function(e) {
     var targetCountry = 'Germany'
 
     $.get('/api/songs/' + targetCountry, function(allSongs) {
+    $('#results-list').html('');	
 	_.each(allSongs, function(song, index) {
 	  console.log(song);
 	  
@@ -89,6 +92,7 @@ $('#Kenya').click(function(e) {
     var targetCountry = 'Kenya'
 
     $.get('/api/songs/' + targetCountry, function(allSongs) {
+    $('#results-list').html('');
 	_.each(allSongs, function(song, index) {
 	  console.log(song);
 	  
@@ -103,37 +107,25 @@ $('#Kenya').click(function(e) {
 
 // test data
 var users = [
-	{email: 'user1@testing.com', password: 'thiswillbeencripted', 
-		playlist: [
+	{id: 1, email: 'user1@testing.com', password: 'thiswillbeencripted', 
+		songs: [
 		{artist: "Andreas Bourani", trackName: "Auf uns", country: "Germany", link: "https://www.youtube.com/watch?v=MYNLQjrBVPo"},
 		{artist: "Clean Bandit", trackName: "Rather Be ft. Jess Glynne", country: "Germany", link: "https://www.youtube.com/watch?v=m-M1AtrxztU"}
 		]
 	}];
 
-// var users = [
-// 	{artist: "Andreas Bourani", trackName: "Auf uns", country: "Germany", link: "https://www.youtube.com/watch?v=MYNLQjrBVPo"},
-// 	{artist: "Clean Bandit", trackName: "Rather Be ft. Jess Glynne", country: "Germany", link: "https://www.youtube.com/watch?v=m-M1AtrxztU"}
-// ]
-
-
 //underscore tempalte
-var userTemplate =  _.template($('#user-template').html()),
 var playlistTemplate = _.template($('#playlist-template').html());
 
-_.each(users, function(songHtml, index) {
-console.log(songHtml);
-var $songHtml = $(playlistTemplate(songHtml));
-$songHtml.attr('data-index', index);	  
-$('#playlist').append($songHtml);
-_.each(post.comments, function(comment) {
+_.each(users, function(song, index) {
+console.log(song);
+var $song = $(playlistTemplate(song));
+$song.attr('data-index', index);	  
+$('#playlist').append($song);
 
-$('#comment-display-' + comment.postId).append(postController.commentTemplate(comment));
-	});
-
-
-
+// _.each(users, function(user, key, list) {
+// 	var template = $("#playlist-template").html(); 
+// 	$("#playlist").html(_.template(template, {users: users}));
+// });
 });
-
-   
-
-
+});
