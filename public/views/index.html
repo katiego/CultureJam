@@ -145,14 +145,15 @@
   	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
 <!-- search results underscore template -->
 	<script type="text/template" id="searchResults-template">
-    <li class="list-unstyled"> <span style="font-size:140%" >
+    <li class="list-unstyled" data-id="<%= _id %>" > <span style="font-size:140%" >
     	<%= trackName %> - </span>
     	<span style="font-size:120%"><%= artist %> <br>
     	<%= country %> &nbsp; &nbsp; &nbsp;      
 	  <a class="icon-play" data-toggle="collapse" id="">
 	      <span class="glyphicon glyphicon-play"></span>
 	  </a> &nbsp; &nbsp; &nbsp;
-      <a class="glyphicon glyphicon-star" data-toggle="collapse">
+      <a class="icon-star" data-toggle="collapse" id="star">
+        <span class="glyphicon glyphicon-star"></span>
       </a>
 
     	</li>
@@ -160,9 +161,9 @@
 <!-- playlist underscore template -->
 <script type="text/template" id="playlist-template">
     <ul class="list-unstyled"> <span style="font-size:140%" >
-       <% for (var song in songs) { %>
-           <li><%= songs[song].trackName %></li>
-       <% } %>
+
+        <li><%= trackName %></li>
+
     
   </div>
 

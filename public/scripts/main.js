@@ -1,15 +1,58 @@
 $(function() {
-console.log('js works times 2');
-//test data
-// var songs = [
-// 	{trackName: "Go Home", artist: "Lucius", country: "USA"},
-// 	{trackName: "The Rip Tide", artist: "Beirut", country: "USA"}
-// ];
+console.log('js works');
 
-
+//underscore tempalte
+var playlistTemplate = _.template($('#playlist-template').html());
 
 // compile underscore template for song search
 var resultsTemplate = _.template($('#searchResults-template').html());
+
+
+
+
+//check and change login message
+$.get('/currentuser', function(response){
+	//server responds with the current user
+	if (response === null){
+		//no one logged in
+		$("#loggedInMessage").html("you're not logged in"); 
+	} else {
+		//someone is logged in 
+		$("#loggedInMessage").html("you're logged in as " + response.email); 
+		var songs = response.songs
+		console.log(songs)
+		_.each(songs, function(song, index) {
+	  		console.log(song);
+	  
+		  var $songHtml = $(playlistTemplate(song));
+		  console.log($songHtml);
+		  $('#playlist').append($songHtml);
+	});
+	};
+});
+
+ //click star, add song to current user's playlist
+$('#results-list').on('click', '.icon-star', function(e) {
+    console.log('star works', $(this).closest("li").attr('data-id'));
+    var songId = $(this).closest("li").attr('data-id');
+    console.log(songId);
+    
+	$.ajax({
+        type: 'PUT',
+        url: '/currentuser/songs/' + songId,
+        success: function(data) {
+          var song = data;
+          console.log('found data: ', song)
+      		
+      	$('#playlist').append(playlistTemplate(song))
+     
+      }
+    });
+});
+
+
+
+
 
 /// on click events + show songs for selected country
 $('#Japan').click(function(e) {
@@ -103,16 +146,6 @@ $('#Kenya').click(function(e) {
 	});
 });
 
-// Playlist code
-
-// test data
-var users = [
-	{id: 1, email: 'user1@testing.com', password: 'thiswillbeencripted', 
-		songs: [
-		{artist: "Andreas Bourani", trackName: "Auf uns", country: "Germany", link: "https://www.youtube.com/watch?v=MYNLQjrBVPo"},
-		{artist: "Clean Bandit", trackName: "Rather Be ft. Jess Glynne", country: "Germany", link: "https://www.youtube.com/watch?v=m-M1AtrxztU"}
-		]
-	}];
 
 // add new song via modal
 $('#exampleModal').on('show.bs.modal', function (event) {
@@ -136,19 +169,7 @@ $('#add-song').on('submit', function() {
 
 
 
-//underscore tempalte
-var playlistTemplate = _.template($('#playlist-template').html());
-
-_.each(users, function(song, index) {
-console.log(song);
-var $song = $(playlistTemplate(song));
-$song.attr('data-index', index);	  
-$('#playlist').append($song);
-
-// _.each(users, function(user, key, list) {
-// 	var template = $("#playlist-template").html(); 
-// 	$("#playlist").html(_.template(template, {users: users}));
-// });
 });
-});
+
+
 
