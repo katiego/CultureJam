@@ -13,10 +13,10 @@ $.get('/currentuser', function(response){
 	//server responds with the current user
 	if (response === null){
 		//no one logged in
-		$("#loggedInMessage").html("you're not logged in"); 
+		$("#loggedInMessage").html("log in to view your playlist"); 
 	} else {
 		//someone is logged in 
-		$("#loggedInMessage").html("you're logged in as " + response.email); 
+		$("#loggedInMessage").html("Hello, " + response.firstName); 
 		var songs = response.songs
 		console.log(songs)
 		_.each(songs, function(song, index) {
@@ -29,12 +29,16 @@ $.get('/currentuser', function(response){
 	};
 });
 
+//validation
+
+
  //click star, add song to current user's playlist
 $('#results-list').on('click', '.icon-star', function(e) {
     console.log('star works', $(this).closest("li").attr('data-id'));
     var songId = $(this).closest("li").attr('data-id');
     console.log(songId);
     
+
 	$.ajax({
         type: 'PUT',
         url: '/currentuser/songs/' + songId,
@@ -44,6 +48,23 @@ $('#results-list').on('click', '.icon-star', function(e) {
       		
       	$('#playlist').append(playlistTemplate(song))
      
+      }
+    });
+});
+
+//click 'x', delete song from user's playlist
+$('#playlist').on('click', '.delete-song', function(e) {
+    console.log('delete works', $(this).closest("li").attr('data-id'));
+    var songId = $(this).closest("li").attr('data-id');
+    console.log(songId);
+
+    $.ajax({
+        type: 'DELETE',
+        url: '/currentuser/songs/' + songId,
+        success: function(data) {
+          var song = data;
+          // remove deleted phrase from view
+          $('#playlist').remove(playlistTemplate(song))
       }
     });
 });
@@ -162,9 +183,23 @@ $('#add-song').on('submit', function() {
 	$(this)[0].reset();	
 });
 
-
-
+$('#results-list').on('click', '.icon-play', function(e){
+	var full = $(this).attr("link");
+	var linkId = full.split("v=")[1];
+	console.log(linkId);
+	var html = '<iframe class="col-md-12" height="315" src="https://www.youtube.com/embed/' + linkId + '?autoplay=1" frameborder="0" allowfullscreen></iframe>'
+    $(".videoColumn").html(html);
 });
 
 
+$('#playlist').on('click', '.icon-play', function(e){
+	var full = $(this).attr("link");
+	var linkId = full.split("v=")[1];
+	console.log(linkId);
+	var html = '<iframe class="col-md-12" height="315" src="https://www.youtube.com/embed/' + linkId + '?autoplay=1" frameborder="0" allowfullscreen></iframe>'
+    $(".videoColumn").html(html);
+});
+
+
+});
 

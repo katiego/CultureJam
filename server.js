@@ -60,7 +60,7 @@ app.use('/', function (req, res, next) {
   next();  // required for middleware
 });
 
-// set up root route to respond with 'index.html'
+// set up root route to respond with static files
 app.get('/', function (req, res) {
   res.sendFile(__dirname + '/public/views/index.html');
 });
@@ -72,8 +72,6 @@ app.get('/signup', function (req, res) {
 app.get('/login', function (req, res) {
   res.sendFile(__dirname + '/public/views/login.html');
 });
-
-// user submits the login form
 
 
 // create new user with secure password
@@ -119,19 +117,20 @@ app.get("/currentuser", function(req, res){
   }); 
 });
 
+//logout user
 app.get("/logout", function(req, res){
   req.logout();
   res.redirect("/"); 
 })
-//end auth 
 
-
+//view all song data 
 app.get('/api/songs', function (req, res) {
   Song.find(function (err, songs) {
     res.json(songs);
   });
 });
 
+//add song  
 app.post('/api/songs', function (req, res) {
   var newSong = new Song({
     artist: req.body.artist,
@@ -146,6 +145,7 @@ console.log(newSong)
   });
 });
 
+//get songs by country
 app.get('/api/songs/:country', function(req, res) {
 	var targetCountry = req.params.country
 	console.log(targetCountry)
@@ -163,7 +163,7 @@ app.get('/api/songs/:country', function(req, res) {
   });
 });
 
-
+//view all users
 app.get('/api/users', function(req, res) {
   User.find(function (err, users) {
     res.json(users);
@@ -195,6 +195,37 @@ app.put('/currentuser/songs/:songId', function(req, res) {
   });
 });
 
+app.delete('/currentuser/songs/:songId', function (req, res) {
+  
+var songId = req.params.songId
+  Song.findOne({_id: songId}, function (err, foundSong){
+  console.log('found song to delete: ', foundSong);
+
+    req.currentUser(function (err, user){
+     if(err){
+        console.log("error: ", err);
+        res.status(500).send(err);
+      } else {
+
+
+      User.findOne({_id: user._id}, function (err, foundUser) {
+        console.log('found user: ', foundUser);
+
+      // get the index of the found item
+      var index = foundUser.songs.indexOf(foundSong);
+      console.log('index of song: ', index)
+//THIS DOESNT WORK - NOT FINDING RIGHT INDEX
+      // remove the item at that index, only remove 1 item
+      foundUser.songs.splice(index, 1);
+      foundUser.save()
+
+      // send back deleted object
+      res.json(foundSong)
+      });
+      }
+    }); 
+  });
+});
 
 // listen on port 3000
 app.listen(process.env.PORT || 3000);

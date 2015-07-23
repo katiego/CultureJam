@@ -1,21 +1,53 @@
-body {
-    margin-top: 50px; /* Required margin for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
-
-}
-
-
 html,
 body {
   height: 100%;
-  background-color: #FFFAFA;
-  padding-right: 30px;
-  padding-left: 30px;
 }
 
+
+body{
+  margin-top: 50px; /* Required margin for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+  background-image: url("https://www.mapbox.com/tilemill/assets/pages/zoom-styling-2.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding-right: 30px;
+  padding-left: 30px;
+  padding: 0px;
+}
+
+
+
+.container{
+	height: 100%;
+}
 
 .list-unstyled {
 	padding: 10px; 
 	border-bottom: line;
 }
 
-.globe
+
+#loggedInMessage{
+	position: absolute;
+	left: 10px !important;
+	color: white;
+	font-size: 15px;
+	width: 50% !important;
+}
+
+.columns{
+/*	background-color: green;*/
+}
+
+.videoColumn{
+	text-align: center;
+	height: 100%;
+/*	background-color: hsla(0,0%,100%, .5)*/
+}
+
+#logo{
+	text-align: center;
+}
+
+h1 {
+    font-size: 60px;
+}

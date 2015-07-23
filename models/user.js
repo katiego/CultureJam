@@ -7,12 +7,11 @@ var mongoose = require('mongoose'),
 
 var UserSchema = new Schema({
   firstName: String,
-  email: {type: String, validate: [ /\S+@\S+\.\S/, 'Email is not valid' ] },
+  email: String,
   passwordDigest: String,
   songs: [Song.schema]
 });
 
-UserSchema.path('email').required(/\S+@\S+\.\S/);
 
 // create a new user with secure (hashed) password
 UserSchema.statics.createSecure = function (userData, callback) {
