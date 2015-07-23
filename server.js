@@ -7,7 +7,10 @@ var express = require('express'),
     salt = bcrypt.genSaltSync(10),
     session = require('express-session');    
 
-mongoose.connect('mongodb://localhost/projectOne' // plug in the db name you've been using
+mongoose.connect(
+  process.env.MONGOLAB_URI ||
+  process.env.MONGOHQ_URL ||
+  'mongodb://localhost/projectOne' // plug in the db name you've been using
 );
 
 // set session options
