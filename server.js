@@ -199,17 +199,17 @@ app.delete('/currentuser/songs/:songId', function (req, res) {
         // res.status(500).send(err);
         // } else {
 
-          var foundUser = user
-          console.log(foundUser);
-          User.findByIdAndUpdate(foundUser._id), {
+          var foundUser = user;
+          console.log('user: ', foundUser);
+          User.findByIdAndUpdate((foundUser._id), {
             $pull: {
               songs: {_id: req.params.songId}
-            }}, function(song) {
-            console.log(song);
+            }}, function(err, song) {
+            console.log('song to delete: ', song);
             res.json(song);
-              }
-            });  
+              });  
       // }
+    });
 });
 
 

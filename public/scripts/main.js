@@ -65,24 +65,27 @@ $('#results-list').on('click', '.icon-star', function(e) {
           console.log('found data: ', song)
       		
       	$('#playlist').append(playlistTemplate(song))
+
      
       }
     });
 });
 
+var songId; 
+
 //click 'x', delete song from user's playlist
-$('#playlist').on('click', '.delete-song', function(e) {
-    console.log('delete works', $(this).closest("li").attr('data-id'));
-    var songId = $(this).closest("li").attr('data-id');
+$('#playlist').on('click', '.delete-song', function(song) {
+	console.log($(this).parent().parent().parent().html());
+    songId = $(this).closest("li").attr('data-id');
     console.log(songId);
 
     $.ajax({
         type: 'DELETE',
         url: '/currentuser/songs/' + songId,
-        success: function(data) {
-          var song = data;
-          // remove deleted song from view
-          $('#playlist').remove(playlistTemplate(song))
+        success: function(song) {
+          console.log(song);
+          console.log(song._id);
+          $('#' + songId).remove();
       }
     });
 });
