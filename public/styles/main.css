@@ -6,7 +6,7 @@ body {
 
 body{
   margin-top: 50px; /* Required margin for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
-  background-image: url("https://www.mapbox.com/tilemill/assets/pages/zoom-styling-2.png");
+  background-image: url("http://www.ustar-consortium.com/images/top_worldmap.png");
   background-size: cover;
   background-repeat: no-repeat;
   padding-right: 30px;

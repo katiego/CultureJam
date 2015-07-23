@@ -13,7 +13,7 @@ $.get('/currentuser', function(response){
 	//server responds with the current user
 	if (response === null){
 		//no one logged in
-		$("#loggedInMessage").html("log in to view your playlist"); 
+		$("#loggedInMessage").html("Log in to view your playlist"); 
 	} else {
 		//someone is logged in 
 		$("#loggedInMessage").html("Hello, " + response.firstName); 
@@ -29,8 +29,26 @@ $.get('/currentuser', function(response){
 	};
 });
 
-//validation
+//ON CLICK METHODS
 
+//play songs
+
+$('#results-list').on('click', '.icon-play', function(e){
+	var full = $(this).attr("link");
+	var linkId = full.split("v=")[1];
+	console.log(linkId);
+	var html = '<iframe class="col-md-12" height="315" src="https://www.youtube.com/embed/' + linkId + '?autoplay=1" frameborder="0" allowfullscreen></iframe>'
+    $(".videoColumn").html(html);
+});
+
+
+$('#playlist').on('click', '.icon-play', function(e){
+	var full = $(this).attr("link");
+	var linkId = full.split("v=")[1];
+	console.log(linkId);
+	var html = '<iframe class="col-md-12" height="315" src="https://www.youtube.com/embed/' + linkId + '?autoplay=1" frameborder="0" allowfullscreen></iframe>'
+    $(".videoColumn").html(html);
+});
 
  //click star, add song to current user's playlist
 $('#results-list').on('click', '.icon-star', function(e) {
@@ -63,7 +81,7 @@ $('#playlist').on('click', '.delete-song', function(e) {
         url: '/currentuser/songs/' + songId,
         success: function(data) {
           var song = data;
-          // remove deleted phrase from view
+          // remove deleted song from view
           $('#playlist').remove(playlistTemplate(song))
       }
     });
@@ -74,7 +92,6 @@ $('#playlist').on('click', '.delete-song', function(e) {
 $('#Japan').click(function(e) {
     e.preventDefault();// prevent the default anchor functionality
     console.log('japan click works');
-
 
     var targetCountry = 'Japan'
 
@@ -183,22 +200,7 @@ $('#add-song').on('submit', function() {
 	$(this)[0].reset();	
 });
 
-$('#results-list').on('click', '.icon-play', function(e){
-	var full = $(this).attr("link");
-	var linkId = full.split("v=")[1];
-	console.log(linkId);
-	var html = '<iframe class="col-md-12" height="315" src="https://www.youtube.com/embed/' + linkId + '?autoplay=1" frameborder="0" allowfullscreen></iframe>'
-    $(".videoColumn").html(html);
-});
 
-
-$('#playlist').on('click', '.icon-play', function(e){
-	var full = $(this).attr("link");
-	var linkId = full.split("v=")[1];
-	console.log(linkId);
-	var html = '<iframe class="col-md-12" height="315" src="https://www.youtube.com/embed/' + linkId + '?autoplay=1" frameborder="0" allowfullscreen></iframe>'
-    $(".videoColumn").html(html);
-});
 
 
 });
