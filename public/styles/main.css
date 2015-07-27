@@ -14,7 +14,16 @@ body{
   padding: 0px;
 }
 
+/*This is the code that fixed the button issue*/
 
+#results-list > li > span:nth-child(2) > a.icon-play{
+	text-decoration: none;
+}
+#star > span{
+	text-decoration: none;
+}
+
+/*...*/
 
 .container{
 	height: 100%;
