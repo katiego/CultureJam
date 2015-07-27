@@ -17,10 +17,10 @@ body{
 /*This is the code that fixed the button issue*/
 
 #results-list > li > span:nth-child(2) > a.icon-play{
-	text-decoration: none;
+	text-decoration: none !important;
 }
 #star > span{
-	text-decoration: none;
+	text-decoration: none !important;
 }
 
 /*...*/
